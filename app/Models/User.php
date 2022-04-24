@@ -31,6 +31,7 @@ class User extends Authenticatable
         'github_id',
         'google_id',
         'auth_type',
+        'is_blocked',
     ];
 
     /**
@@ -43,8 +44,9 @@ class User extends Authenticatable
         'remember_token',
         'two_factor_recovery_codes',
         'two_factor_secret',
-        // 'profile_photo_url',
         'is_admin',
+        'auth_type',
+        'is_blocked',
     ];
 
     /**
@@ -68,5 +70,10 @@ class User extends Authenticatable
     public function isAdmin()
     {
        return $this->is_admin;
-    }   
+    }
+
+    public function isBlocked()
+    {
+       return $this->is_blocked;
+    }
 }

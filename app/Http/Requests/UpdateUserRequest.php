@@ -11,17 +11,18 @@ class UpdateUserRequest extends FormRequest
         return [
             'name'    => [
                 'string',
-                'required',
+                // 'required',
             ],
             'email'   => [
-                'required',
+                // 'required',
                 'unique:users,email,' . request()->route('user')->id,
             ],
-
             'profile_photo_url'  => [
                 'string',
             ],
-
+            'is_blocked'     => [
+                'boolean',
+            ],
         ];
     }
 

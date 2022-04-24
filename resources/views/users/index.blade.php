@@ -29,6 +29,9 @@
                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                         Photo
                                     </th>
+                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Status
+                                    </th>
                                     <th scope="col" width="200" class="px-6 py-3 bg-gray-50">
 
                                     </th>
@@ -56,6 +59,22 @@
                                         </td>
 
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                            <form action="{{ route('users.update', $user->id) }}" method="POST">
+                                                @csrf
+                                                @method('put')
+                                                @if ($user->is_blocked != 0)
+                                                    <button class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150" name="is_blocked" value='0'>
+                                                        Unblock
+                                                    </button>
+                                                @else
+                                                    <button class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150" name="is_blocked" value='1'>
+                                                        Block
+                                                    </button>
+                                                @endif
+                                            </form>
+                                        </td>
+
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                             <a href="{{ route('users.edit', $user->id) }}" class="text-indigo-600 hover:text-indigo-900 mb-2 mr-2">Edit</a>
                                             <form class="inline-block" action="{{ route('users.destroy', $user->id) }}" method="POST" onsubmit="return confirm('Are you sure?');">
                                                 <input type="hidden" name="_method" value="DELETE">
@@ -75,3 +94,37 @@
         </div>
     </div>
 </x-app-layout>
+{{-- <script>
+    const selectElements = document.querySelectorAll('.toggle-class');
+    
+    selectElements.forEach(element => {
+      element.addEventListener('change', (event) => {
+        const request = new XMLHttpRequest();
+        request.open('POST', '/changeStatus', true);
+        request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+        const userId = event.target.getAttribute('data-id');
+        console.log(userId);
+        request.send(JSON.stringify({
+            'is_blocked': event.target.checked, 
+            'user_id': userId
+        }));
+      }); 
+    });
+
+    // $(function() {
+    //   $('.toggle-class').change(function() {
+    //       var status = $(this).prop('checked') ? 1 : 0; 
+    //       var user_id = $(this).data('id'); 
+           
+    //       $.ajax({
+    //           type: "POST",
+    //           dataType: "json",
+    //           url: '/changeStatus',
+    //           data: {'is_blocked': status, 'user_id': user_id},
+    //           success: function(data){
+    //             console.log(data.success)
+    //           }
+    //       });
+    //   })
+    // })
+  </script> --}}

@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\Response;
 
-class AdminUsersController extends Controller
+class AdminUsersController extends AuthController
 {
     public function index()
     {
@@ -37,11 +37,6 @@ class AdminUsersController extends Controller
         return redirect()->route('users.index');
     }
 
-    public function show(User $user)
-    {
-        return view('users.show', compact('user'));
-    }
-
     public function edit(User $user)
     {
         return view('users.edit', compact('user'));
@@ -56,9 +51,16 @@ class AdminUsersController extends Controller
 
     public function destroy(User $user)
     {
-
         $user->delete();
 
         return redirect()->route('users.index');
     }
+
+    // public function changeUserStatus(Request $request)
+    // {
+    //     $user = User::find($request->user_id);
+    //     $user->is_blocked = $request->is_blocked;
+    //     $user->save();
+    //     return redirect()->route('users.index');
+    // }
 }

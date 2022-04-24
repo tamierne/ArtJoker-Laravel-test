@@ -36,4 +36,5 @@ Route::get('getRegisteredUsers', [UserlistGetterController::class, 'getUsersList
 
 Route::group(['middleware' => 'admin'], function(){
     Route::resource('users', AdminUsersController::class);
+    // Route::post('users.changeStatus', [AdminUsersController::class, 'changeUserStatus']);
 });

@@ -79,6 +79,17 @@
                         </div>
 
                         <div class="flex items-center justify-end px-4 py-3 bg-white text-right gap-4">
+                            
+                            @if ($user->is_blocked != 0)
+                                <button class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150" name="is_blocked" value='0'>
+                                    Unblock
+                                </button>
+                            @else
+                                <button class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150" name="is_blocked" value='1'>
+                                    Block
+                            </button>
+                            @endif
+
                             <div class="block mb-8">
                                 <a href="{{ url()->previous() }}" class="inline-flex items-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">Cancel</a>
                             </div>

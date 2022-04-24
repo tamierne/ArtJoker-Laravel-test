@@ -19,15 +19,16 @@ class StoreUserRequest extends FormRequest
                 'required',
                 'unique:users',
             ],
-
             'password' => [
                 'required',
                 'string',
                 Password::min(8),
             ],
-
             'profile_photo_url' => [
                 'string',
+            ],
+            'is_blocked'     => [
+                'boolean',
             ],
         ];
     }
