@@ -17,9 +17,14 @@ class CheckBlocked
      */
     public function handle(Request $request, Closure $next)
     {
-        if ( Auth::check() && Auth::user()->isBlocked() )
+        if ( Auth::check() && (Auth::user()->isBlocked() == 1))
         {
-            Auth::logout();
+            Auth::guard('web')->logout();
+
+            $request->session()->invalidate();
+
+            $request->session()->regenerateToken();
+            
             $message = 'Your account has been blocked. Please contact administrator.';
             return redirect()->route('login')->withMessage($message);
         }
